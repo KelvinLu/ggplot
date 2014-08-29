@@ -17,11 +17,14 @@ SHAPES = [
     '*'#octagon
 ]
 
-def shape_gen():
+def shape_gen(user_def_shapes=None):
     while True:
-        for shape in SHAPES:
-            yield shape
-
+        if user_def_shapes is None:
+            for shape in SHAPES:
+                yield shape
+        else:
+            for shape in user_def_shapes:
+                yield shape
 
 def assign_shapes(data, aes):
     """Assigns shapes to the given data based on the aes and adds the right legend
