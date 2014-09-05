@@ -4,6 +4,8 @@ import numpy as np
 from .geom import geom
 
 class geom_text(geom):
+    GEOM_ORDER = 1
+
     DEFAULT_AES = {'alpha': None, 'angle': 0, 'color': 'black', 'family': None,
                    'fontface': 1, 'hjust': None, 'size': 12, 'vjust': None,
                    'lineheight': 1.2}
@@ -12,6 +14,13 @@ class geom_text(geom):
 
     _aes_renames = {'angle': 'rotation', 'lineheight': 'linespacing'}
     _units = {'alpha', 'color', 'family', 'size'}
+
+    def plot_layer(self, data, ax):
+        # Because geom_text's overiding _plot_unit method wants the
+        # original geom plot_layer's local data (which comes from ggplot, not a
+        # geom argument), not the class attribute data
+        self.data = data
+        super(geom_text, self).plot_layer(data, ax)
 
     def _plot_unit(self, pinfo, ax):
         x = pinfo.pop('x')
@@ -52,6 +61,7 @@ class geom_text(geom):
             xmin = min(xmin, cxmin)
             ymax = max(ymax, cymax)
             ymin = min(ymin, cymin)
+
 
         # TODO: Fix the defaults for this
         # try out 0.5

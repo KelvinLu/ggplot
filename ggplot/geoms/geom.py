@@ -165,6 +165,7 @@ class geom(object):
             self._stat = self._stat_type()
             self._stat.params.update(self._stat_params)
         gg.geoms.append(self)
+        gg.geoms.sort(key=lambda g: getattr(g, 'GEOM_ORDER', 0))
         return gg
 
     def _verify_aesthetics(self, data):
