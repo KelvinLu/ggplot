@@ -29,7 +29,7 @@ def assign_visual_mapping(data, aes, gg):
     data, legend['fill'] = colors.assign_colors(data, aes, gg, 'fill')
     data, legend['size'] = size.assign_sizes(data, aes)
     data, legend['linetype'] = linetypes.assign_linetypes(data, aes)
-    data, legend['shape'] = shapes.assign_shapes(data, aes)
+    data, legend['shape'] = shapes.assign_shapes(data, aes, gg)
     data, legend['alpha'] = alphas.assign_alphas(data, aes)
 
     # Delete empty entries in the legend

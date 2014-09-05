@@ -26,7 +26,7 @@ def shape_gen(user_def_shapes=None):
             for shape in user_def_shapes:
                 yield shape
 
-def assign_shapes(data, aes):
+def assign_shapes(data, aes, gg):
     """Assigns shapes to the given data based on the aes and adds the right legend
 
     Parameters
@@ -47,7 +47,7 @@ def assign_shapes(data, aes):
     legend_entry = dict()
     if 'shape' in aes:
         shape_col = aes['shape']
-        shape = shape_gen()
+        shape = shape_gen(gg.manual_shape_list)
         labels, scale_type, indices = get_labels(data, shape_col, "discrete")
         # marker in matplotlib are not unicode ready in 1.3.1 :-( -> use explicit str()...
         shape_mapping = dict((value, str(six.next(shape))) for value in labels)
