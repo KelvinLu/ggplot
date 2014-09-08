@@ -173,8 +173,11 @@ def assign_discrete_colors(data, gg, aes_name, color_col, labels):
     """
     _mcolumn = ':::%s_mapping:::' % aes_name
     possible_colors = np.unique(data[color_col])
-    if gg.manual_color_list:
-        color = color_gen(len(possible_colors), gg.manual_color_list)
+
+    manual_palette = {"color": gg.manual_color_list, "fill": gg.manual_fill_list}
+
+    if manual_palette[aes_name]:
+        color = color_gen(len(possible_colors), manual_palette[aes_name])
     else:
         color = color_gen(len(possible_colors))
     color_mapping = dict((value, six.next(color)) for value in possible_colors)

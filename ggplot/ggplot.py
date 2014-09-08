@@ -106,6 +106,8 @@ class ggplot(object):
         self.colormap = plt.cm.Blues
         self.manual_color_list = None
 
+        self.manual_fill_list = None
+
     def __repr__(self):
         """Print/show the plot"""
         figure = self.draw()
